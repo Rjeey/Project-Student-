@@ -1,27 +1,44 @@
 package ru.javabegin.training.fastjava2.Menu;
 
+import com.mongodb.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Action {
-      static List<StudentOrg> list = new LinkedList<StudentOrg>();
 
-    public void Outinf() {
-        if (list.isEmpty()) {
-            System.out.print("Information: \"List is empty\"\n");
-        }
-        for (Object item : list) {
-            System.out.println(item);
-        }
 
+    MongoClient mongoClient = new MongoClient("localhost", 27017);
+    DB db = mongoClient.getDB("student_info");
+    DBCollection table = db.getCollection("student");
+    MongoCredential credential = MongoCredential.createScramSha1Credential("Teacher", "student_info", "123456".toCharArray());
+    Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+
+
+    public Action() {
+        mongoLogger.setLevel(Level.SEVERE);
     }
 
-    public void AddStudent() {
+
+    public void Outinf() throws Exception {
+
+        DBCursor cursor = table.find();
+        if (cursor.hasNext()) {
+            while(cursor.hasNext())
+            {
+                System.out.println(cursor.next());
+            }
+        }else System.out.println("No records");
+
+}
+
+
+
+    public void AddStudent()throws Exception {
         BufferedReader nm ;
         BufferedReader sn ;
         BufferedReader dt ;
@@ -32,6 +49,8 @@ public class Action {
         int number = 0;
         int course = 0;
         boolean payskin;
+
+
 
         try {
 
@@ -114,8 +133,17 @@ public class Action {
                 }
                 payskin = Boolean.parseBoolean(stpayskin);
                 System.out.println();
+            BasicDBObject document = new BasicDBObject();
+            document.put("name", name);
+            document.put("surename",surename);
+            document.put("date",date);
+            document.put("number",number);
+            document.put("course",course);
+            document.put("gender",gender);
+            document.put("payskin",payskin);
 
-            list.add(new StudentOrg( name, surename, date, number, course, gender, payskin));
+            table.insert(document);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,7 +153,7 @@ public class Action {
 
     }
 
-    public void RemoveNote() {
+    public void RemoveNote()throws Exception {
         try {
             BufferedReader deln;
             BufferedReader dels;
@@ -147,16 +175,15 @@ public class Action {
                     surename = dels.readLine();
                 }
             }
-            StudentOrg wanted= new StudentOrg(name,surename);
-            if (list.isEmpty()){
-                System.out.println("List is empty");
-            }else
-            for (StudentOrg st:list) {
-                if (st.equals(wanted)) {
-                    list.remove(st);
+
+            BasicDBObject doc = new BasicDBObject();
+            DBCursor cursor = table.find();
+            if(cursor.hasNext()) {
+                    doc.append("name",name).append("surename",surename);
+                    table.remove(doc);
                     System.out.println("Student is removed");
-                }
-            }
+            } else System.out.println("No records");
+
 
         }catch (IOException ex){
             System.out.println(ex.getMessage());
