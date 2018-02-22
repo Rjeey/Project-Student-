@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 public class Action {
 
-
     MongoClient mongoClient = new MongoClient("localhost", 27017);
     DB db = mongoClient.getDB("student_info");
     DBCollection table = db.getCollection("student");
@@ -33,7 +32,6 @@ public class Action {
                 System.out.println(cursor.next());
             }
         }else System.out.println("No records");
-
 }
 
 
@@ -144,12 +142,9 @@ public class Action {
 
             table.insert(document);
 
-
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-
 
     }
 
@@ -183,7 +178,6 @@ public class Action {
                     table.remove(doc);
                     System.out.println("Student is removed");
             } else System.out.println("No records");
-
 
         }catch (IOException ex){
             System.out.println(ex.getMessage());
