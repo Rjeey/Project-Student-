@@ -37,13 +37,6 @@ public class Action {
 
 
     public void AddStudent()throws Exception {
-        BufferedReader nm ;
-        BufferedReader sn ;
-        BufferedReader dt ;
-        BufferedReader n ;
-        BufferedReader cr;
-        BufferedReader fl;
-        BufferedReader pn;
         int number = 0;
         int course = 0;
         boolean payskin;
@@ -52,81 +45,75 @@ public class Action {
 
         try {
 
-            nm = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Inter name: ");
-            String name = nm.readLine();
+            String name = bufferedReader.readLine();
             if (Filters.filterForname(name)) {
                 while (Filters.filterForname(name)) {
                     System.out.println("you typed something wrong repeat please");
-                    name = nm.readLine();
+                     name = bufferedReader.readLine();
                 }
             }
 
 
-            sn = new BufferedReader(new InputStreamReader(System.in));
+
             System.out.print("Inter surname: ");
-            String surename = sn.readLine();
+            String surename = bufferedReader.readLine();
             if (Filters.filterForname(surename)) {
                 while (Filters.filterForname(surename)) {
-                    System.out.println("\n" +"you typed something wrong repeat please");
-                    surename = sn.readLine();
+                    System.out.println("you typed something wrong repeat please");
+                    surename = bufferedReader.readLine();
                 }
             }
-
-            dt = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("\rInter date:");
+            
             System.out.println("Example <12.12.2014>");
-            System.out.print("\rInput: ");
-
-            String date = dt.readLine();
+            System.out.println("Inter date:");
+            String date = bufferedReader.readLine();
             if (Filters.date(date)) {
                while ( Filters.date(date)) {
                         System.out.println("you typed something wrong repeat please");
-                        date = dt.readLine();
+                        date = bufferedReader.readLine();
                }
 
             }
 
-
-            n = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("\rInter Phone number: ");
-            String stnum = n.readLine();
+            System.out.print("Inter Phone number: ");
+            String stnum = bufferedReader.readLine();
             if ( Filters.number(stnum)) {
                 while ( Filters.number(stnum)) {
                     System.out.println("you typed something wrong repeat please");
-                    stnum = n.readLine();
+                    stnum = bufferedReader.readLine();
                 }
             } else number = Integer.parseInt(stnum);
 
 
-            cr = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("\rInter Number course: ");
-            String stcourse = cr.readLine();
+
+            System.out.print("Inter Number course: ");
+            String stcourse = bufferedReader.readLine();
             if ( Filters.course(stcourse)) {
                 while (Filters.course(stcourse)) {
                     System.out.println("you typed something wrong repeat please");
-                    stcourse = cr.readLine();
+                    stcourse = bufferedReader.readLine();
                 }
-            } else course = Integer.parseInt(stcourse);
+            }  course = Integer.parseInt(stcourse);
 
 
-            fl = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("\rInter Gender: ");
-            String gender = fl.readLine();
+
+            System.out.print("Inter Gender: ");
+            String gender = bufferedReader.readLine();
             if (Filters.filterForGender(gender)) {
                 while (Filters.filterForGender(gender)) {
                         System.out.println("you typed something wrong repeat please");
-                        gender = fl.readLine();
+                        gender = bufferedReader.readLine();
                 }
             }
 
-            pn = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("\rInter position student \" true  or false \": ");
-            String stpayskin = pn.readLine();
+            System.out.print("Inter position student \" true  or false \": ");
+            String stpayskin = bufferedReader.readLine();
             if (Filters.filterForPos(stpayskin)) {
                    while (Filters.filterForPos(stpayskin)) {
                         System.out.println("field must not be empty and he contain name \"true or false\"");
-                        stpayskin = pn.readLine();
+                        stpayskin = bufferedReader.readLine();
                    }
                 }
                 payskin = Boolean.parseBoolean(stpayskin);
