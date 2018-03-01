@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 public class Menu {
     Menu() {
         System.out.print("Menu\n");
-        System.out.print("If you want \"Out put all students\" press 1;\n");
-        System.out.print("If you want \"Add new student\" press 2;\n");
-        System.out.print("If you want \"remove student\" press 3;\n");
-        System.out.print("If you want see menu again press 4.\n");
-        System.out.print("If you want \" go exit\" press 0;\n");
+        System.out.print("If you want \"Out put all students\" write Output;\n");
+        System.out.print("If you want \"Add new student\" write Input;\n");
+        System.out.print("If you want \"remove student\" write delete;\n");
+        System.out.print("If you want see menu again write menu.\n");
+        System.out.print("If you want \" go exit\" write exit;\n");
 
 
     }
@@ -19,6 +19,7 @@ public class Menu {
     public void printmenu() {
 
         Action act = new Action();
+        StudentOrg student=new StudentOrg();
 
         try {
             br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,33 +28,32 @@ public class Menu {
             System.out.println();
             System.out.print("");
 
-            if ("1".equals(input)) {
+            if ("Output".equals(input)||"output".equals(input)) {
                 act.Outinf();
 
-            }   if ("2".equals(input)){
+            }   if ("Input".equals(input)||"input".equals(input)){
                 System.out.println("you choice \"Add new student\"");
-                act.AddStudent();
+                act.AddStudent(student);
 
-            }   if ("3".equals(input)){
+            }   if ("delete".equals(input)||"Delete".equals(input)){
                 System.out.println("you choice \"remove student\"");
                 System.out.println("please write the criterion on the removed");
                 act.RemoveNote();
 
-            } if ("0".equals(input)){
+            } if ("exit".equals(input)||"Exit".equals(input)){
                 br.close();
                 System.out.println(" you choice go exit");
                 System.out.println("GoodBye");
                 System.exit(0);
-            } if ("4".equals(input)){
-                System.out.println("Menu");
-                System.out.print("If you want \"Out put all students\" press 1;\n ");
-                System.out.print("If you want \"Add new student\" press 2;\n");
-                System.out.print("If you want \"remove student\" press 3;\n");
-                System.out.print("If you want see menu again press 4;\n");
-                System.out.print("If you want \" go exit\" press 0.\n");
+            } if ("menu".equals(input)||"Menu".equals(input)){
+                System.out.print("Menu\n");
+                System.out.print("If you want \"Out put all students\" write Output;\n");
+                System.out.print("If you want \"Add new student\" write Input;\n");
+                System.out.print("If you want \"remove student\" write delete;\n");
+                System.out.print("If you want see menu again write menu.\n");
+                System.out.print("If you want \" go exit\" write exit;\n");
 
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();
